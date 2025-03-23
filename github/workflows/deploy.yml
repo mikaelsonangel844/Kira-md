@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Change "main" si ta branche principale a un autre nom
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -13,10 +14,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: yarn install  # Remplace par "npm install" si tu utilises npm
-
-      - name: Trigger Render Deploy
-        run: curl -X POST "$RENDER_DEPLOY_HOOK"
-        env:
-          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+      - name: Trigger Render Deployment
+        run: |
+          curl -X POST "https://api.render.com/deploy/srv-cv6li7d2ng1s73fv4i4g?key=aph_5hNEhu0"
